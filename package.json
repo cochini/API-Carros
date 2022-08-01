@@ -1,0 +1,21 @@
+{
+  "name": "apicarros",
+  "version": "1.0.0",
+  "description": "APIREST de gestão de carros.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pw3",
+    "nodejs",
+    "etec",
+    "barueri",
+    "3DS"
+  ],
+  "author": "CINTIA OCHINI",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
