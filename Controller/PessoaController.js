@@ -73,15 +73,15 @@ router.post('/inserirPessoa', (req, res)=>{
 });
 
 router.put('/atualizarPessoa/:ID_PESSOA', (req, res)=>{
-    let {ID_PESSOA, NOME, SOBRENOME, CPF, RG} = req.body;
+    let {ID_PESSOA} =  req.params;
+    let { NOME, SOBRENOME, CPF, RG} = req.body;
 
     PessoalModel.update(
-        {where:{ID_PESSOA}},
         {NOME},
         {SOBRENOME},
         {CPF},
         {RG},
-        
+        {where:{ID_PESSOA}},
 
     ).then( ()=>{
 
