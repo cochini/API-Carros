@@ -2,10 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-const PessoalModel = require('../Model/PessoalModel');
+const PessoaModel = require('../Model/PessoaModel');
 
 router.get('/listarPessoas', (req, res)=>{
-    PessoalModel.findAll()
+    PessoaModel.findAll()
         .then(
             (pessoa)=>{
                 return res.status(200).json(pessoa);
@@ -25,7 +25,7 @@ router.get('/listarPessoa/:id',(req, res)=>{
 
     let {id} = req.params;
 
-    PessoalModel.findByPk(id)
+    PessoaModel.findByPk(id)
         .then(
             (pessoa)=>{
                 res.status(200).json(pessoa);
@@ -43,13 +43,13 @@ router.get('/listarPessoa/:id',(req, res)=>{
 });
 
 router.post('/inserirPessoa', (req, res)=>{
-    let {ID_PESSOA, NOME, SOBRENOME, CPF, RG} = req.body;
+    let {idPessoa, nome, sobrenome, CPF, RG} = req.body;
 
-    PessoalModel.create(
+    PessoaModel.create(
         {
-            ID_PESSOA,
-            NOME,
-            SOBRENOME,
+            idPessoa,
+            nome,
+            sobrenome,
             CPF,
             RG
         }
@@ -72,22 +72,21 @@ router.post('/inserirPessoa', (req, res)=>{
     );
 });
 
-router.put('/atualizarPessoa/:ID_PESSOA', (req, res)=>{
-    let {ID_PESSOA} =  req.params;
-    let { NOME, SOBRENOME, CPF, RG} = req.body;
+router.put('/atualizarPessoa/:idPessoa', (req, res)=>{
+    let {idPessoa} =  req.params;
+    let {nome, sobrenome, CPF, RG} = req.body;
 
-    PessoalModel.update(
-        {NOME},
-        {SOBRENOME},
-        {CPF},
-        {RG},
-        {where:{ID_PESSOA}},
-
-    ).then( ()=>{
+    PessoaModel.update({
+        nome,
+        sobrenome,
+        CPF,
+        RG
+    },
+        {where:{idPessoa}}).then(()=>{
 
         return res.status(200).json({
             erroStatus: false,
-            menssagemStatus: 'Pessoa alterado com sucesso!'
+            menssagemStatus: 'Pessoa alterada com sucesso!'
         });
 
     }).catch(
@@ -101,17 +100,17 @@ router.put('/atualizarPessoa/:ID_PESSOA', (req, res)=>{
     );
 });
 
-router.delete('/deletarPessoa/:ID_PESSOA', (req, res)=>{
+router.delete('/deletarPessoa/:idPessoa', (req, res)=>{
     
-    let {ID_PESSOA} = req.params;
+    let {idPessoa} = req.params;
 
-    PessoalModel.destroy(
-        {where: {ID_PESSOA}}
+    PessoaModel.destroy(
+        {where: {idPessoa}}
     ).then( ()=>{
 
         return res.status(200).json({
             erroStatus: false,
-            menssagemStatus: 'Pessoa excluido com sucesso!'
+            menssagemStatus: 'Pessoa excluida com sucesso!'
         });
 
     }).catch(

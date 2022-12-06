@@ -1,11 +1,13 @@
 const Sequelize = require('sequelize');
 
+const Pessoa = require("./PessoaModel")
+
 const connection = require('../Database/database');
 
-const Pessoa = connection.define(
-    'tbl_pessoa',
+const Automovel = connection.define(
+    'tbl_automovel',
     {
-        ID_PESSOA:{
+        idAutomovel:{
             type: Sequelize.INTEGER,
             autoIncrement: true,
             allowNull: false,
@@ -13,29 +15,44 @@ const Pessoa = connection.define(
             "timestamps": false
         },
 
-        NOME:{
+        fabricante:{
             type: Sequelize.STRING(50),
             allowNull: false,
             "timestamps": false
         },
 
-        SOBRENOME:{
+        preco:{
+            type: Sequelize.STRING(20),
+            allowNull: false,
+            "timestamps": false
+        },
+
+        modelo:{
+            type: Sequelize.STRING(100),
+            allowNull: false,
+            "timestamps": false
+        },
+
+        ano:{
+            type: Sequelize.STRING(5),
+            allowNull: false,
+            "timestamps": false
+        },
+
+        cor:{
             type: Sequelize.STRING(50),
             allowNull: false,
             "timestamps": false
         },
 
-        CPF:{
-            type: Sequelize.STRING(20),
-            allowNull: false,
-            "timestamps": false
-        },
-
-        RG:{
-            type: Sequelize.STRING(20),
-            allowNull: false,
-            "timestamps": false
-        },
     });
 
-module.exports = Pessoa;
+Pessoa.hasMany(Automovel)
+
+Automovel.belongsTo(Pessoa)
+
+// Automovel.sync({
+//         force: true
+//     }) 
+
+module.exports = Automovel;

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const connection = new Sequelize(
-    'carros',
+    'dbautomovel',
     'root',
     '',
     {
@@ -12,5 +12,6 @@ const connection = new Sequelize(
         }
     }
 );
+
 
 module.exports = connection;
